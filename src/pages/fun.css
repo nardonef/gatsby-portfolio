@@ -1,0 +1,12 @@
+
+
+@media only screen and (min-width: 450px) {
+    .fun-container {
+        width: 100vw;
+        display: grid;
+        grid-template-columns: 45vw 45vw;
+        grid-template-rows: 40vh 41vh;
+        justify-content: center;
+        align-items: center;
+        grid-gap: 10px;    }
+}
