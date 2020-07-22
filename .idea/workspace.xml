@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="842d8842-5788-4762-87dc-e219ae99324a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/skills.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gatsby-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/gatsby-config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/image.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/image.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/video.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/video.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/video.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/video.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/aboutMe.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/fun.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/fun.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/fun.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/fun.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="842d8842-5788-4762-87dc-e219ae99324a" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -215,7 +196,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="1" />
     <option name="y" value="23" />
     <option name="width" value="1680" />
@@ -275,6 +256,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
@@ -324,15 +306,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1591318055803</updated>
-      <workItem from="1591318056866" duration="43785000" />
+      <workItem from="1591318056866" duration="43854000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43785000" />
+    <option name="totallyTimeSpent" value="43854000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="23" width="1680" height="962" extended-state="1" />
+    <frame x="1" y="23" width="1680" height="962" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="npm" side_tool="true" />
