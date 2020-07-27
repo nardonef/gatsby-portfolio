@@ -8,7 +8,7 @@ const Video = ({ image, text, videoUrl }) => {
   const [hover, setHover] = useState(false)
 
   const renderHoverStates = () => {
-    return hover
+    return !hover
       ? <PB className={"play-button"}/>
       : <p className={"video-text"}>{text}</p>
   }
@@ -17,14 +17,15 @@ const Video = ({ image, text, videoUrl }) => {
   return (
     <div onMouseEnter={() => setHover(true)}
          onMouseLeave={() => setHover(false)}
-         onClick={() => window.open(videoUrl)}
-         className={"video-container"}>
+         href={videoUrl}
+         className={"video-container"}
+         target="_blank"
+         rel="noopener noreferrer">
       <Image image={image} className={"video-image"}/>
-      {
-        window.innerWidth >= 450
-          ? renderHoverStates()
-          : <p className={"video-text"}>{text}</p>
-      }
+      <div className={"video-text-container"}>
+        {renderHoverStates()}
+      </div>
+      <p className={"video-text-mobile"}>{text}</p>
     </div>
   )
 }

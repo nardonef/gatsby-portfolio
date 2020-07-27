@@ -33,6 +33,10 @@
         width: 100%;
         opacity: 1;
     }
+
+    .burger-menu {
+        display: none;
+    }
 }
 .animation {
     opacity: 1;

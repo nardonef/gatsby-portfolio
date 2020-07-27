@@ -8,7 +8,7 @@ import Video from "../components/video"
 import SEO from "../components/seo"
 import "./fun.css"
 
-const Fun = () => {
+const Fun = ({location}) => {
  const data = useStaticQuery(graphql`
     query {
       thailand: file(relativePath: { eq: "fun/thailand.jpg" }) {
@@ -27,7 +27,7 @@ const Fun = () => {
   `)
 
   return (
-    <Layout>
+    <Layout location={location}>
       {/*<div className={'fun-container'}>*/}
       {/*  <YouTube*/}
       {/*    videoId={'ZfgG8UChcoo'}*/}

@@ -8,8 +8,8 @@ import "./index.css"
 import Goo from 'gooey-react'
 
 
-const Skills = () => (
-  <Layout>
+const Skills = ({location}) => (
+  <Layout location={location}>
     <SEO title="Home" />
     <div className={'container'}>
       <h3>I specialize in full stack web development and devops.</h3>

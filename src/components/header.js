@@ -6,7 +6,7 @@ import Burger from '@animated-burgers/burger-squeeze'
 import '@animated-burgers/burger-squeeze/dist/styles.css'
 
 
-const Header = (props) => {
+const Header = ({location}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const hasMenuBeenClicked = useRef(false);
 
@@ -16,7 +16,7 @@ const Header = (props) => {
   }
 
   const renderActiveLinkClass = (link) => {
-    return link === window.location.pathname
+    return link === location.pathname
       ? 'active-link'
       : null
   }
@@ -42,17 +42,9 @@ const Header = (props) => {
           Fun
         </Link>
       </div>
-      {window.innerWidth > 450 && <Burger className={'burger-menu'} onClick={onMenuClick} isOpen={menuOpen}/>}
+      <Burger className={'burger-menu'} onClick={onMenuClick} isOpen={menuOpen}/>
     </header>
   )
-}
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
 }
 
 export default Header
