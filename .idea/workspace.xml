@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="842d8842-5788-4762-87dc-e219ae99324a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/video.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/video.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/video.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/video.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/404.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/404.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/fun.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/fun.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/skills.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/skills.js" afterDir="false" />
-    </list>
+    <list default="true" id="842d8842-5788-4762-87dc-e219ae99324a" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -49,8 +39,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/components/video.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="399">
-                  <caret line="29" column="11" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
+                <state relative-caret-position="131">
+                  <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
                 </state>
               </provider>
             </entry>
@@ -163,8 +153,8 @@
       <find>assest</find>
       <find>media</find>
       <find>ima</find>
-      <find>window</find>
       <find>props</find>
+      <find>window</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -328,16 +318,15 @@
       <option name="presentableId" value="Default" />
       <updated>1591318055803</updated>
       <workItem from="1591318056866" duration="43854000" />
-      <workItem from="1595384966741" duration="4330000" />
+      <workItem from="1595384966741" duration="4590000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48184000" />
+    <option name="totallyTimeSpent" value="48444000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="962" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="aws.explorer" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12836185" />
@@ -588,8 +577,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/video.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="29" column="11" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
+        <state relative-caret-position="131">
+          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
         </state>
       </provider>
     </entry>
