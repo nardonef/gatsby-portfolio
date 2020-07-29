@@ -1,4 +1,6 @@
-
+_::-webkit-full-page-media, _:future, :root .fun-container {
+    margin-top: 75px;
+}
 
 @media only screen and (min-width: 450px) {
     .fun-container {
@@ -8,5 +10,6 @@
         grid-template-rows: 40vh 41vh;
         justify-content: center;
         align-items: center;
-        grid-gap: 10px;    }
+        grid-gap: 10px;
+    }
 }

@@ -15,18 +15,20 @@ const Video = ({ image, text, videoUrl }) => {
 
 
   return (
-    <div onMouseEnter={() => setHover(true)}
-         onMouseLeave={() => setHover(false)}
-         href={videoUrl}
-         className={"video-container"}
-         target="_blank"
-         rel="noopener noreferrer">
-      <Image image={image} className={"video-image"}/>
-      <div className={"video-text-container"}>
-        {renderHoverStates()}
+    <a href={videoUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={"video-container-link"}>
+      <div onMouseEnter={() => setHover(true)}
+           onMouseLeave={() => setHover(false)}
+           className={"video-container"}>
+        <Image image={image} className={"video-image"}/>
+        <div className={"video-text-container"}>
+          {renderHoverStates()}
+        </div>
+        <p className={"video-text-mobile"}>{text}</p>
       </div>
-      <p className={"video-text-mobile"}>{text}</p>
-    </div>
+    </a>
   )
 }
 
