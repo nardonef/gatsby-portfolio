@@ -32,9 +32,9 @@ const Header = ({location}) => {
           Home
         </Link>
         <Link
-          to={'/skills'}
-          className={`menu-link ${renderActiveLinkClass('/skills')}`}>
-          Skills
+          to={'/projects'}
+          className={`menu-link ${renderActiveLinkClass('/projects')}`}>
+          Projects
         </Link>
         <Link
           to={'/fun'}

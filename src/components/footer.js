@@ -11,9 +11,21 @@ const Footer = () => {
   return (
     <>
       <footer className={'footer'}>
-        <Github className={'icon'}/>
+        <a href={"https://github.com/nardonef"}
+           target="_blank"
+           rel="noopener noreferrer">
+          <Github className={'icon'}/>
+        </a>
+        <a href={"mailto: franknardone95@gmail.com"}
+           target="_blank"
+           rel="noopener noreferrer">
         <Mail className={'icon'}/>
+        </a>
+        <a href={"https://www.linkedin.com/in/nardonefrank/"}
+           target="_blank"
+           rel="noopener noreferrer">
         <LinkedIn className={'icon'}/>
+        </a>
       </footer>
       <div className='footer-spacer'/>
     </>
