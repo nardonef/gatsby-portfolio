@@ -60,8 +60,8 @@ h2 {
 }
 
 .gooey-svg {
-    width: 50vw;
-    height: 50vh;
+    width: 100vw;
+    height: 53vh;
     margin-top: -25px;
 }
 
@@ -73,6 +73,11 @@ h2 {
     h2 {
         font-size: 1.7rem;
         line-height: 0.5;
+    }
+
+    .gooey-svg {
+        width: 50vw;
+        height: 50vh;
     }
 }
 

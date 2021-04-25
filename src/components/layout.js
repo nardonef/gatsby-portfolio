@@ -17,9 +17,7 @@ const Layout = ({ children, location }) => {
   return (
     <div className={'layout-wrapper'}>
       <Header location={location}/>
-      <div>
-        <main>{children}</main>
-      </div>
+      {children}
       <Footer/>
     </div>
   )

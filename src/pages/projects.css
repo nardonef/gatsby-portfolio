@@ -1,0 +1,28 @@
+.projects-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.projects-text {
+    margin-top: 10%;
+    width: 600px;
+}
+
+.project-title {
+    font-size: 30px;
+}
+
+.project-description {
+    font-size: 20px;
+    line-height: 0.9;
+}
+
+.project-image {
+    width: 300px;
+}
+
+.app-icon {
+    width: 64px;
+    height: 64px;
+}
