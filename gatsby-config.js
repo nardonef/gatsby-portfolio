@@ -36,6 +36,7 @@ module.exports = {
           include: /assets/
         }
       }
-    }
+    },
+    `gatsby-plugin-anchor-links`
   ],
 }

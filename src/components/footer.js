@@ -9,7 +9,7 @@ const Footer = () => {
 
   // todo use gatsby image
   return (
-    <>
+    <div className={'footer-container'}>
       <footer className={'footer'}>
         <a href={"https://github.com/nardonef"}
            target="_blank"
@@ -27,8 +27,8 @@ const Footer = () => {
         <LinkedIn className={'icon'}/>
         </a>
       </footer>
-      <div className='footer-spacer'/>
-    </>
+      {/*<div className='footer-spacer'/>*/}
+    </div>
   )
 }
 

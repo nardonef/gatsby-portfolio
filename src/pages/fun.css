@@ -1,10 +1,15 @@
-_::-webkit-full-page-media, _:future, :root .fun-container {
-    margin-top: 75px;
+.grid {
+    width: 100vw;
 }
 
+.fun-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
 
 @media only screen and (min-width: 450px) {
-    .fun-container {
+    .grid {
         width: 100vw;
         display: grid;
         grid-template-columns: 45vw 45vw;
