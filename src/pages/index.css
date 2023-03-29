@@ -89,10 +89,12 @@ svg * {
 }
 
 @keyframes left {
+    0% {}
     100% { transform: rotate(-360deg) }
 }
 
 @keyframes right {
+    0% {}    
     100% { transform: rotate(360deg) }
 }
 
@@ -100,6 +102,7 @@ svg * {
 
 
 @keyframes blob_four {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(-12.5%, -12.5%);
         transform: rotate(-1turn) translate(-12.5%, -12.5%);
@@ -107,6 +110,7 @@ svg * {
 }
 
 @-moz-keyframes blob_four {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(-12.5%, -12.5%);
         transform: rotate(-1turn) translate(-12.5%, -12.5%);
@@ -114,6 +118,7 @@ svg * {
 }
 
 @-webkit-keyframes blob_four {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(-12.5%, -12.5%);
         transform: rotate(-1turn) translate(-12.5%, -12.5%);
@@ -121,6 +126,7 @@ svg * {
 }
 
 @-o-keyframes blob_four {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(-12.5%, -12.5%);
         transform: rotate(-1turn) translate(-12.5%, -12.5%);
@@ -128,6 +134,7 @@ svg * {
 }
 
 @-ms-keyframes blob_four {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(-12.5%, -12.5%);
         transform: rotate(-1turn) translate(-12.5%, -12.5%);
@@ -137,6 +144,7 @@ svg * {
 
 
 @keyframes blob_three {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(-12.5%,12.5%);
         transform: rotate(-1turn) translate(-12.5%,12.5%);
@@ -144,6 +152,7 @@ svg * {
 }
 
 @-moz-keyframes blob_three {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(-12.5%,12.5%);
         transform: rotate(-1turn) translate(-12.5%,12.5%);
@@ -151,6 +160,7 @@ svg * {
 }
 
 @-webkit-keyframes blob_three {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(-12.5%,12.5%);
         transform: rotate(-1turn) translate(-12.5%,12.5%);
@@ -158,6 +168,7 @@ svg * {
 }
 
 @-o-keyframes blob_three {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(-12.5%,12.5%);
         transform: rotate(-1turn) translate(-12.5%,12.5%);
@@ -165,6 +176,7 @@ svg * {
 }
 
 @-ms-keyframes blob_three {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(-12.5%,12.5%);
         transform: rotate(-1turn) translate(-12.5%,12.5%);
@@ -174,6 +186,7 @@ svg * {
 
 
 @keyframes blob_two {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(12.5%,-12.5%);
         transform: rotate(-1turn) translate(12.5%,-12.5%);
@@ -181,6 +194,7 @@ svg * {
 }
 
 @-moz-keyframes blob_two {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(12.5%,-12.5%);
         transform: rotate(-1turn) translate(12.5%,-12.5%);
@@ -188,6 +202,7 @@ svg * {
 }
 
 @-webkit-keyframes blob_two {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(12.5%,-12.5%);
         transform: rotate(-1turn) translate(12.5%,-12.5%);
@@ -195,6 +210,7 @@ svg * {
 }
 
 @-o-keyframes blob_two {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(12.5%,-12.5%);
         transform: rotate(-1turn) translate(12.5%,-12.5%);
@@ -202,6 +218,7 @@ svg * {
 }
 
 @-ms-keyframes blob_two {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(12.5%,-12.5%);
         transform: rotate(-1turn) translate(12.5%,-12.5%);
@@ -212,6 +229,7 @@ svg * {
 
 
 @keyframes blob_one {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(-12.5%,-12.5%);
         transform: rotate(-1turn) translate(-12.5%,-12.5%);
@@ -219,6 +237,7 @@ svg * {
 }
 
 @-moz-keyframes blob_one {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(-12.5%,-12.5%);
         transform: rotate(-1turn) translate(-12.5%,-12.5%);
@@ -226,6 +245,7 @@ svg * {
 }
 
 @-webkit-keyframes blob_one {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(-12.5%,-12.5%);
         transform: rotate(-1turn) translate(-12.5%,-12.5%);
@@ -233,6 +253,7 @@ svg * {
 }
 
 @-o-keyframes blob_one {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(-12.5%,-12.5%);
         transform: rotate(-1turn) translate(-12.5%,-12.5%);
@@ -240,6 +261,7 @@ svg * {
 }
 
 @-ms-keyframes blob_one {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn) translate(-12.5%,-12.5%);
         transform: rotate(-1turn) translate(-12.5%,-12.5%);
@@ -251,6 +273,7 @@ svg * {
 
 
 @keyframes rotate_back {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn);
         transform: rotate(-1turn);
@@ -258,6 +281,7 @@ svg * {
 }
 
 @-moz-keyframes rotate_back {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn);
         transform: rotate(-1turn);
@@ -265,6 +289,7 @@ svg * {
 }
 
 @-webkit-keyframes rotate_back {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn);
         transform: rotate(-1turn);
@@ -272,6 +297,7 @@ svg * {
 }
 
 @-o-keyframes rotate_back {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn);
         transform: rotate(-1turn);
@@ -279,6 +305,7 @@ svg * {
 }
 
 @-ms-keyframes rotate_back {
+    0% {}
     100% {
         -webkit-transform: rotate(-1turn);
         transform: rotate(-1turn);
