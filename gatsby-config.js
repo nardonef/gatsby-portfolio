@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Frank Nardone`,
-    description: `Frank Nardone's portfolio`,
+    description: `Frank Nardone — designer and developer. Projects, work, and more.`,
     author: `@nardonef`,
   },
   plugins: [
@@ -18,8 +18,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Frank Nardone`,
+        short_name: `Frank`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,

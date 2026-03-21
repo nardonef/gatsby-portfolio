@@ -1,32 +1,19 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React, {useState, useRef} from "react"
+import React from "react"
 import "./header.css"
-import Burger from '@animated-burgers/burger-squeeze'
-import '@animated-burgers/burger-squeeze/dist/styles.css'
 
 
 const Header = ({location}) => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const hasMenuBeenClicked = useRef(false);
-
-  const onMenuClick = () => {
-    setMenuOpen(!menuOpen)
-    hasMenuBeenClicked.current = true;
-  }
-
   const renderActiveLinkClass = (link) => {
     return link === location.pathname
       ? 'active-link'
       : null
   }
 
-
-  const menuAnimationClass = hasMenuBeenClicked.current ? menuOpen ? 'animation' : 'closed' : '';
-
   return (
     <header className={'header'}>
-      <div className={`menu-items ${menuAnimationClass}`}>
+      <nav className={'menu-items'} aria-label="Main navigation">
         <Link to={'/'}
               className={`menu-link ${renderActiveLinkClass('/')}`}>
           Home
@@ -39,10 +26,9 @@ const Header = ({location}) => {
         <Link
           to={'/fun'}
           className={`menu-link ${renderActiveLinkClass('/fun')}`}>
-          Fun
+          Travel
         </Link>
-      </div>
-      <Burger className={'burger-menu'} onClick={onMenuClick} isOpen={menuOpen}/>
+      </nav>
     </header>
   )
 }

@@ -5,32 +5,103 @@ import Image from "../components/image"
 import "./projects.css"
 import { graphql, useStaticQuery } from "gatsby"
 
-
 const Projects = ({location}) => {
   const data = useStaticQuery(graphql`
-      query {
-          rankr: file(relativePath: { eq: "rankr.png" }) {
-              ...squareImage
-          }
-          app: file(relativePath: { eq: "app-store-64.png" }) {
-              ...squareImage
-          }
+    query {
+      dashboard: file(relativePath: { eq: "fantasy-hub/01_dashboard.png" }) {
+        ...squareImage
       }
+      analytics: file(relativePath: { eq: "fantasy-hub/02_analytics.png" }) {
+        ...squareImage
+      }
+      standings: file(relativePath: { eq: "fantasy-hub/04_standings_detail.png" }) {
+        ...squareImage
+      }
+      dashboardScrolled: file(relativePath: { eq: "fantasy-hub/09_dashboard_scrolled.png" }) {
+        ...squareImage
+      }
+      aptihealth: file(relativePath: { eq: "clients/aptihealth.png" }) {
+        ...squareImage
+      }
+      youversion: file(relativePath: { eq: "clients/youversion.jpg" }) {
+        ...squareImage
+      }
+      zones: file(relativePath: { eq: "clients/zones.png" }) {
+        ...squareImage
+      }
+      forthealth: file(relativePath: { eq: "clients/forthealth.png" }) {
+        ...squareImage
+      }
+    }
   `)
+
+  const fantasyScreenshots = [
+    { image: data.dashboard, alt: "Fantasy League Hub dashboard" },
+    { image: data.analytics, alt: "Analytics overview" },
+    { image: data.standings, alt: "Standings detail view" },
+    { image: data.dashboardScrolled, alt: "Dashboard scrolled view" },
+  ]
+
+  const clients = [
+    { name: "aptihealth", url: "https://www.aptihealth.com/", description: "Virtual mental health platform", logo: data.aptihealth },
+    { name: "YouVersion", url: "https://www.youversion.com/", description: "Bible app, 1B+ downloads", logo: data.youversion },
+    { name: "Zones", url: "https://www.zones.com/", description: "Global IT solutions", logo: data.zones },
+    { name: "Fort Health", url: "https://www.forthealth.com/", description: "Pediatric mental health care", logo: data.forthealth },
+  ]
+
   return (
     <Layout location={location}>
-    <SEO title="Projects" />
-    <div className={'projects-container'}>
-      <div className="projects-text">
-        <h1 className={'project-title'}>iRanked</h1>
-        <h2 className={'project-description'}>An iOS app to help keep track of favorite restaurants</h2>
-        <Image image={data.app.childImageSharp.fluid} className={"app-icon"}/>
-      </div>
-      <div>
-        <Image image={data.rankr.childImageSharp.fluid} className={"project-image"}/>
-      </div>
-    </div>
-  </Layout>
+      <SEO title="Projects" />
+      <main className="projects-page">
+
+        <section className="featured-project" aria-labelledby="featured-title">
+          <div className="featured-header">
+            <span className="featured-badge">Featured</span>
+            <h1 id="featured-title" className="featured-title">Fantasy League Hub</h1>
+            <p className="featured-description">
+              A native iOS app for fantasy football analytics. Connect your Yahoo
+              and Sleeper leagues to surface years of history into deep stats,
+              head-to-head breakdowns, draft grades, and AI-driven insights.
+            </p>
+            <div className="tech-tags" aria-label="Technologies used">
+              {["SwiftUI", "Swift Charts", "Node.js", "Express", "TypeScript", "PostgreSQL", "Clerk"].map(tag => (
+                <span key={tag} className="tech-tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+          <div className="screenshot-gallery" role="region" aria-label="App screenshots" tabIndex="0">
+            <div className="screenshot-track">
+              {fantasyScreenshots.map((s, i) => (
+                <div key={i} className="screenshot-frame">
+                  <Image image={s.image.childImageSharp.fluid} className="screenshot-image" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="clients-section" aria-labelledby="clients-title">
+          <h2 id="clients-title" className="clients-title">Worked With</h2>
+          <div className="clients-grid">
+            {clients.map(client => (
+              <a key={client.name}
+                 href={client.url}
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="client-slot"
+                 aria-label={`${client.name} — ${client.description}`}>
+                <Image image={client.logo.childImageSharp.fluid} className="client-logo" />
+                <div className="client-info">
+                  <span className="client-name">{client.name}</span>
+                  <span className="client-description">{client.description}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+
+      </main>
+    </Layout>
   )
 }
 
