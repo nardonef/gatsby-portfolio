@@ -77,6 +77,28 @@ h2 {
 
 /* ===== Responsive ===== */
 
+@media only screen and (max-width: 719px) {
+    @keyframes blob_four {
+        0% {}
+        100% { transform: rotate(-1turn) translate(-25%, -25%); }
+    }
+
+    @keyframes blob_three {
+        0% {}
+        100% { transform: rotate(-1turn) translate(-25%, 25%); }
+    }
+
+    @keyframes blob_two {
+        0% {}
+        100% { transform: rotate(-1turn) translate(25%, -25%); }
+    }
+
+    @keyframes blob_one {
+        0% {}
+        100% { transform: rotate(-1turn) translate(-25%, -25%); }
+    }
+}
+
 @media only screen and (max-width: 450px) and (orientation: landscape) {
     .container {
         margin-top: 10vh;
