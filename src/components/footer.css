@@ -3,27 +3,35 @@
     justify-content: space-evenly;
     align-self: center;
     width: 250px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     margin-top: 20px;
 }
 
-.icon {
-    fill: white;
-    width: 20px;
-    height: 20px;
+.footer a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.footer-spacer {
-    height: 50px;
-    width:100%;
-    background:transparent;
+.footer a:hover {
+    transform: translateY(-3px);
+}
+
+.icon {
+    fill: rgba(255, 255, 255, 0.7);
+    width: 24px;
+    height: 24px;
+    transition: fill 0.25s;
+}
+
+.footer a:hover .icon {
+    fill: mediumspringgreen;
 }
 
 @media only screen and (min-width: 720px) {
-    .footer-spacer {
-        display: none;
-    }
-
     .footer {
         width: 250px;
         margin-top: 0;
@@ -32,5 +40,14 @@
     .icon {
         width: 35px;
         height: 35px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .footer a {
+        transition: none;
+    }
+    .footer a:hover {
+        transform: none;
     }
 }

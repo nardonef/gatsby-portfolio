@@ -6,29 +6,25 @@ import LinkedIn from '../../assets/linkedin.svg'
 import './footer.css'
 
 const Footer = () => {
-
-  // todo use gatsby image
   return (
-    <>
-      <footer className={'footer'}>
-        <a href={"https://github.com/nardonef"}
-           target="_blank"
-           rel="noopener noreferrer">
-          <Github className={'icon'}/>
-        </a>
-        <a href={"mailto: franknardone95@gmail.com"}
-           target="_blank"
-           rel="noopener noreferrer">
+    <footer className={'footer'}>
+      <a href={"https://github.com/nardonef"}
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="GitHub profile">
+        <Github className={'icon'}/>
+      </a>
+      <a href={"mailto:franknardone95@gmail.com"}
+         aria-label="Send email">
         <Mail className={'icon'}/>
-        </a>
-        <a href={"https://www.linkedin.com/in/nardonefrank/"}
-           target="_blank"
-           rel="noopener noreferrer">
+      </a>
+      <a href={"https://www.linkedin.com/in/nardonefrank/"}
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="LinkedIn profile">
         <LinkedIn className={'icon'}/>
-        </a>
-      </footer>
-      <div className='footer-spacer'/>
-    </>
+      </a>
+    </footer>
   )
 }
 

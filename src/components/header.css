@@ -1,110 +1,52 @@
 .header {
     display: flex;
     background: #003049;
-    justify-content: flex-end;;
+    justify-content: flex-end;
 }
 
 .menu-link {
-    color: white;
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.05rem;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.25s, border-color 0.25s;
+}
+
+.menu-link:hover {
+    color: white;
 }
 
 .active-link {
-    border-bottom: 2px solid white;
+    color: white;
+    border-bottom-color: white;
 }
 
 .menu-items {
-    opacity: 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
     height: 50px;
     width: 30%;
-    /*width: 45%;*/
-}
-
-.burger-menu {
-    margin-top: 8px;
-    margin-right: 20px;
 }
 
 @media only screen and (max-width: 450px) {
     .menu-items {
         width: 100%;
-        opacity: 1;
         padding-top: 10px;
     }
+}
 
-    .burger-menu {
-        display: none;
+@media only screen and (min-width: 451px) and (max-width: 720px) {
+    .menu-items {
+        width: 50%;
     }
 }
-.animation {
-    opacity: 1;
-    animation: fadeIn ease 1s;
-    -webkit-animation: fadeIn ease 1s;
-    -moz-animation: fadeIn ease 1s;
-    -o-animation: fadeIn ease 1s;
-    -ms-animation: fadeIn ease 1s;
-}
 
-.closed {
-    opacity: 0;
-    animation: fadeOut ease 1s;
-    -webkit-animation: fadeOut ease 1s;
-    -moz-animation: fadeOut ease 1s;
-    -o-animation: fadeOut ease 1s;
-    -ms-animation: fadeOut ease 1s;
-}
-
-@keyframes fadeIn {
-    0% {opacity:0;}
-    100% {opacity:1;}
-}
-
-@-moz-keyframes fadeIn {
-    0% {opacity:0;}
-    100% {opacity:1;}
-}
-
-@-webkit-keyframes fadeIn {
-    0% {opacity:0;}
-    100% {opacity:1;}
-}
-
-@-o-keyframes fadeIn {
-    0% {opacity:0;}
-    100% {opacity:1;}
-}
-
-@-ms-keyframes fadeIn {
-    0% {opacity:0;}
-    100% {opacity:1;}
-}
-
-
-
-@keyframes fadeOut {
-     0% {opacity:1;}
-     100% {opacity:0;}
- }
-
-@-moz-keyframes fadeOut {
-    0% {opacity:1;}
-    100% {opacity:0;}
-}
-
-@-webkit-keyframes fadeOut {
-    0% {opacity:1;}
-    100% {opacity:0;}
-}
-
-@-o-keyframes fadeOut {
-    0% {opacity:1;}
-    100% {opacity:0;}
-}
-
-@-ms-keyframes fadeOut {
-    0% {opacity:1;}
-    100% {opacity:0;}
+@media (prefers-reduced-motion: reduce) {
+    .menu-link {
+        transition: none;
+    }
 }
