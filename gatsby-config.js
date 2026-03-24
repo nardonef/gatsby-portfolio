@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Frank Nardone`,
-    description: `Frank Nardone — designer and developer. Projects, work, and more.`,
+    description: `Frank Nardone — designer and developer specializing in iOS, web, full-stack, and AI-enabled applications. Available for contract work.`,
     author: `@nardonef`,
   },
   plugins: [

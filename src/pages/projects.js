@@ -2,6 +2,7 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Image from "../components/image"
+import ContactCTA from "../components/contact-cta"
 import "./projects.css"
 import { graphql, useStaticQuery } from "gatsby"
 
@@ -43,10 +44,10 @@ const Projects = ({location}) => {
   ]
 
   const clients = [
-    { name: "aptihealth", url: "https://www.aptihealth.com/", description: "Virtual mental health platform", logo: data.aptihealth },
-    { name: "YouVersion", url: "https://www.youversion.com/", description: "Bible app, 1B+ downloads", logo: data.youversion },
-    { name: "Zones", url: "https://www.zones.com/", description: "Global IT solutions", logo: data.zones },
-    { name: "Fort Health", url: "https://www.forthealth.com/", description: "Pediatric mental health care", logo: data.forthealth },
+    { name: "aptihealth", url: "https://www.aptihealth.com/", description: "Virtual mental health platform", work: "iOS development and React Native feature work for a telehealth platform connecting patients with behavioral health providers.", logo: data.aptihealth },
+    { name: "YouVersion", url: "https://www.youversion.com/", description: "Bible app, 1B+ downloads", work: "Mobile development contributions for one of the most downloaded apps in the world, focused on performance and user experience.", logo: data.youversion },
+    { name: "Zones", url: "https://www.zones.com/", description: "Global IT solutions", work: "Full-stack web application development and API integration for enterprise IT procurement and solutions workflows.", logo: data.zones },
+    { name: "Fort Health", url: "https://www.forthealth.com/", description: "Pediatric mental health care", work: "iOS and web development for a pediatric mental health platform, building patient-facing features and provider tools.", logo: data.forthealth },
   ]
 
   return (
@@ -94,6 +95,7 @@ const Projects = ({location}) => {
                 <div className="client-info">
                   <span className="client-name">{client.name}</span>
                   <span className="client-description">{client.description}</span>
+                  <span className="client-work">{client.work}</span>
                 </div>
               </a>
             ))}
@@ -101,6 +103,7 @@ const Projects = ({location}) => {
         </section>
 
       </main>
+      <ContactCTA />
     </Layout>
   )
 }

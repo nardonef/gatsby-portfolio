@@ -29,7 +29,7 @@
     justify-content: space-around;
     align-items: center;
     height: 50px;
-    width: 30%;
+    width: 40%;
 }
 
 @media only screen and (max-width: 450px) {
@@ -41,7 +41,7 @@
 
 @media only screen and (min-width: 451px) and (max-width: 720px) {
     .menu-items {
-        width: 50%;
+        width: 65%;
     }
 }
 

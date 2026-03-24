@@ -1,51 +1,95 @@
+.home-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.home-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 .container {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20vh;
+    justify-content: center;
     padding: 0 5%;
+    position: relative;
+    overflow: hidden;
 }
+
+/* ===== Typography ===== */
 
 h1 {
     margin: 0;
     padding: 0;
-    font-weight: 700;
+    font-weight: 800;
     color: white;
-    letter-spacing: 0.2rem;
-    line-height: 1.1;
-    font-size: 2rem;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    font-size: 3.5rem;
     text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
 }
 
 h2 {
     margin: 0;
     padding: 0;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.85);
-    letter-spacing: 0.1rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
     line-height: 1.2;
-    font-size: 0.85rem;
-    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    margin-top: 1.2rem;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
 }
 
 .intro-text {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.8rem;
     font-weight: 400;
-    letter-spacing: 0.05rem;
-    margin-top: 0.8rem;
+    letter-spacing: 0.06em;
+    margin-top: 1.6rem;
     text-align: center;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
 }
+
+/* ===== Blob ===== */
 
 .goo {
     z-index: -100;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    pointer-events: none;
 }
 
 .gooey-svg {
-    width: 100vw;
-    height: 50vh;
-    margin-top: -25px;
-    max-width: 100%;
+    width: 90vw;
+    height: 70vh;
+    max-width: 800px;
+    opacity: 0.7;
+}
+
+/* ===== Entrance ===== */
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ===== Blob Keyframes ===== */
@@ -75,6 +119,21 @@ h2 {
     100% { transform: rotate(-1turn); }
 }
 
+@keyframes blob_five {
+    0% {}
+    100% { transform: rotate(-1turn) translate(15%, 10%); }
+}
+
+@keyframes blob_six {
+    0% {}
+    100% { transform: rotate(-1turn) translate(-10%, -15%); }
+}
+
+@keyframes blob_seven {
+    0% {}
+    100% { transform: rotate(-1turn) translate(12%, -8%); }
+}
+
 /* ===== Responsive ===== */
 
 @media only screen and (max-width: 719px) {
@@ -97,11 +156,26 @@ h2 {
         0% {}
         100% { transform: rotate(-1turn) translate(-25%, -25%); }
     }
+
+    @keyframes blob_five {
+        0% {}
+        100% { transform: rotate(-1turn) translate(30%, 20%); }
+    }
+
+    @keyframes blob_six {
+        0% {}
+        100% { transform: rotate(-1turn) translate(-20%, -30%); }
+    }
+
+    @keyframes blob_seven {
+        0% {}
+        100% { transform: rotate(-1turn) translate(24%, -16%); }
+    }
 }
 
 @media only screen and (max-width: 450px) and (orientation: landscape) {
     .container {
-        margin-top: 10vh;
+        padding: 0 5%;
     }
 
     .gooey-svg {
@@ -110,28 +184,32 @@ h2 {
 }
 
 @media only screen and (min-width: 720px) {
-    .container {
-        margin-top: 20vh;
-    }
-
     h1 {
-        font-size: 4.5rem;
-        letter-spacing: 0.3rem;
+        font-size: 7rem;
+        letter-spacing: -0.03em;
     }
 
     h2 {
-        font-size: 1.5rem;
-        margin-top: 0.6rem;
+        font-size: 0.9rem;
+        letter-spacing: 0.3em;
+        margin-top: 1.6rem;
     }
 
     .intro-text {
-        font-size: 1rem;
-        margin-top: 1.2rem;
+        font-size: 0.95rem;
+        margin-top: 2rem;
     }
 
     .gooey-svg {
-        width: 50vw;
-        height: 50vh;
+        width: 60vw;
+        height: 70vh;
+        max-width: 900px;
+    }
+}
+
+@media only screen and (min-width: 1080px) {
+    h1 {
+        font-size: 8.5rem;
     }
 }
 
@@ -140,6 +218,12 @@ svg * {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    h1, h2, .intro-text {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+
     svg *,
     .gooey-svg *,
     .gooey-svg g {
