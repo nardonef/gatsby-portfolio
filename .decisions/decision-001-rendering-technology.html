@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decision 1: Rendering Technology — Blob Animation Redesign</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: #f1f5f9;
+      color: #1a1a2e;
+      min-height: 100vh;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid #e2e8f0;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .decision-number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #64748b;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+      margin-top: 0.25rem;
+    }
+
+    .category-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+
+    .category-badge.technical { background: #ede9fe; color: #6d28d9; }
+
+    .decision-description {
+      font-size: 1rem;
+      color: #475569;
+      margin-top: 0.75rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    .instruction {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      background: #eff6ff;
+      color: #1d4ed8;
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      display: inline-block;
+      border: 1px solid #bfdbfe;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+    }
+
+    .option-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+      border: 2px solid #e2e8f0;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .option-card:hover {
+      border-color: #6366f1;
+      box-shadow: 0 4px 20px rgba(99,102,241,0.12);
+    }
+
+    .card-header {
+      padding: 1rem 1.25rem 0.75rem;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .card-header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .option-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .option-card.option-a .option-label { color: #7c3aed; }
+    .option-card.option-b .option-label { color: #0891b2; }
+    .option-card.option-c .option-label { color: #059669; }
+    .option-card.option-d .option-label { color: #dc2626; }
+
+    .option-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .recommended-badge {
+      background: #f59e0b;
+      color: white;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .option-card.chosen {
+      border: 3px solid #059669;
+      box-shadow: 0 4px 20px rgba(5,150,105,0.15);
+    }
+
+    .option-card.chosen:hover { border-color: #059669; }
+
+    .card-badges {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .chosen-badge {
+      background: #059669;
+      color: white;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      display: none;
+    }
+
+    .option-card.chosen .chosen-badge { display: inline-block; }
+
+    .option-card.not-chosen {
+      opacity: 0.55;
+      filter: grayscale(20%);
+    }
+
+    .option-card.not-chosen:hover {
+      opacity: 0.8;
+      filter: none;
+    }
+
+    .visual-preview {
+      padding: 1.5rem;
+      background: #f8fafc;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .option-summary {
+      padding: 1rem 1.25rem;
+      font-size: 0.875rem;
+      color: #334155;
+      line-height: 1.65;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .verdict {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .pros, .cons { padding: 1rem 1.25rem; }
+    .pros { border-right: 1px solid #f1f5f9; }
+
+    .pros h3, .cons h3 {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .pros h3 { color: #059669; }
+    .cons h3 { color: #e11d48; }
+
+    .verdict ul { list-style: none; padding: 0; }
+
+    .verdict li {
+      font-size: 0.8rem;
+      color: #475569;
+      line-height: 1.5;
+      padding: 0.15rem 0;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .pros li::before { content: "\2713 "; color: #059669; font-weight: 700; position: absolute; left: 0; }
+    .cons li::before { content: "! "; color: #e11d48; font-weight: 700; position: absolute; left: 0; }
+
+    .card-footer {
+      padding: 0.75rem 1.25rem;
+      background: #f8fafc;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .tell-claude {
+      font-size: 0.75rem;
+      color: #64748b;
+      background: #f1f5f9;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      display: block;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    }
+
+    .comparison-section {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+    }
+
+    .comparison-section h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 1rem;
+    }
+
+    .comparison-table-wrapper {
+      overflow-x: auto;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      font-size: 0.85rem;
+    }
+
+    .comparison-table th {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-bottom: 2px solid #e2e8f0;
+      white-space: nowrap;
+      position: sticky;
+      top: 0;
+      background: white;
+    }
+
+    .comparison-table th:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background: #f8fafc;
+      color: #64748b;
+    }
+
+    .comparison-table th.col-a { color: #7c3aed; }
+    .comparison-table th.col-b { color: #0891b2; }
+    .comparison-table th.col-c { color: #059669; }
+    .comparison-table th.col-d { color: #dc2626; }
+
+    .comparison-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+    }
+
+    .comparison-table td:first-child {
+      font-weight: 600;
+      color: #475569;
+      position: sticky;
+      left: 0;
+      background: #f8fafc;
+    }
+
+    .comparison-table tr:nth-child(even) td { background: #fafbfc; }
+    .comparison-table tr:nth-child(even) td:first-child { background: #f1f5f9; }
+
+    .comparison-table .col-recommended { background: #fffbeb !important; }
+    .comparison-table .col-chosen { background: #ecfdf5 !important; }
+    .comparison-table tr:last-child td { border-bottom: none; }
+
+    .page-footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .page-footer p {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin: 0.3rem 0;
+    }
+
+    .page-footer strong { color: #334155; }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+      color: #6366f1;
+      text-decoration: none;
+      max-width: 1200px;
+    }
+
+    .back-link:hover { text-decoration: underline; }
+
+    .arch-diagram {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 0.5rem;
+      width: 100%;
+    }
+
+    .arch-layer {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .arch-box {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #334155;
+      text-align: center;
+      min-width: 70px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .arch-box.frontend { border-color: #7c3aed; color: #7c3aed; }
+    .arch-box.backend { border-color: #0891b2; color: #0891b2; }
+    .arch-box.database { border-color: #059669; color: #059669; }
+    .arch-box.service { border-color: #dc2626; color: #dc2626; }
+
+    .arch-arrow {
+      font-size: 1rem;
+      color: #94a3b8;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .options-grid { grid-template-columns: 1fr; }
+      body { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">&larr; All Decisions</a>
+
+  <header>
+    <span class="decision-number">Decision 1 of 5</span>
+    <h1>Rendering Technology</h1>
+    <span class="category-badge technical">Technical</span>
+    <p class="decision-description">
+      This is the foundation everything else builds on. The rendering approach determines what visual effects are possible,
+      how interactive we can get, and how it performs on phones. Your current setup is pure CSS animations on SVG circles
+      with a gooey filter — simple but limited. We need something that can handle organic movement, real-time mouse tracking,
+      and color shifting without dropping frames.
+    </p>
+    <p class="instruction">
+      Tell Claude: <strong>"Option B"</strong> &middot; <strong>"Option A but [change]"</strong> &middot; <strong>"more options"</strong>
+    </p>
+  </header>
+
+  <main class="options-grid">
+
+    <!-- OPTION A: Canvas 2D -->
+    <article class="option-card option-a not-chosen">
+      <div class="card-header">
+        <div class="card-header-top">
+          <span class="option-label">Option A</span>
+          <div class="card-badges">
+            <span class="chosen-badge">Chosen</span>
+          </div>
+        </div>
+        <h2 class="option-title">Canvas 2D Metaballs</h2>
+      </div>
+
+      <div class="visual-preview">
+        <div class="arch-diagram">
+          <div class="arch-layer">
+            <div class="arch-box frontend">React Component</div>
+          </div>
+          <div class="arch-arrow">&darr; refs</div>
+          <div class="arch-layer">
+            <div class="arch-box backend">&lt;canvas&gt; element</div>
+          </div>
+          <div class="arch-arrow">&darr; draw calls</div>
+          <div class="arch-layer">
+            <div class="arch-box database">Canvas 2D Context</div>
+          </div>
+          <div class="arch-arrow">&darr; pixel manipulation</div>
+          <div class="arch-layer">
+            <div class="arch-box service">Metaball Algorithm</div>
+            <div class="arch-box service">Mouse Tracking</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="option-summary">
+        Use the HTML Canvas 2D API with a classic metaball algorithm (computing an energy field per-pixel from multiple point sources).
+        Blobs naturally merge and separate based on proximity — no SVG filter hack needed. Mouse position becomes another energy source
+        that pulls or repels the blobs. Zero dependencies. You write the rendering loop yourself with requestAnimationFrame. This is
+        the most "from scratch" option.
+      </div>
+
+      <div class="verdict">
+        <div class="pros">
+          <h3>Works well when</h3>
+          <ul>
+            <li>You want full pixel-level control</li>
+            <li>Zero external dependencies</li>
+            <li>True metaball physics (natural merge/split)</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>Watch out for</h3>
+          <ul>
+            <li>Per-pixel calculation is CPU-heavy on large screens</li>
+            <li>Harder to get smooth gradients and glow effects</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <code class="tell-claude">Tell Claude: "Option A"</code>
+      </div>
+    </article>
+
+    <!-- OPTION B: WebGL Fragment Shader -->
+    <article class="option-card option-b chosen">
+      <div class="card-header">
+        <div class="card-header-top">
+          <span class="option-label">Option B</span>
+          <div class="card-badges">
+            <span class="recommended-badge">Recommended</span>
+            <span class="chosen-badge">Chosen</span>
+          </div>
+        </div>
+        <h2 class="option-title">WebGL Fragment Shader</h2>
+      </div>
+
+      <div class="visual-preview">
+        <div class="arch-diagram">
+          <div class="arch-layer">
+            <div class="arch-box frontend">React Component</div>
+          </div>
+          <div class="arch-arrow">&darr; uniforms (time, mouse, colors)</div>
+          <div class="arch-layer">
+            <div class="arch-box backend">WebGL Canvas</div>
+          </div>
+          <div class="arch-arrow">&darr; GPU execution</div>
+          <div class="arch-layer">
+            <div class="arch-box" style="border-color: #f59e0b; color: #f59e0b;">Fragment Shader (GLSL)</div>
+          </div>
+          <div class="arch-arrow">&darr; per-pixel parallel</div>
+          <div class="arch-layer">
+            <div class="arch-box service">Metaball Field</div>
+            <div class="arch-box service">Noise Functions</div>
+            <div class="arch-box service">Color Blending</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="option-summary">
+        Write a GLSL fragment shader that runs on the GPU. Every pixel is computed in parallel, so you get buttery 60fps even on
+        full-screen canvases. The metaball energy field, noise-based organic distortion, color gradients, and glow effects all
+        happen in a single shader pass. Mouse position and time are passed in as "uniforms" (variables the shader reads each frame).
+        This is the same tech behind sites like Stripe's gradient and the liquid effects on award-winning portfolios.
+        Thin wrapper — no Three.js needed, just raw WebGL with a fullscreen quad.
+      </div>
+
+      <div class="verdict">
+        <div class="pros">
+          <h3>Works well when</h3>
+          <ul>
+            <li>GPU-accelerated: 60fps at any resolution</li>
+            <li>Noise, glow, color blending are trivial in GLSL</li>
+            <li>Highest visual ceiling of all options</li>
+            <li>~50 lines of JS setup + the shader code</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>Watch out for</h3>
+          <ul>
+            <li>GLSL is a different language (but the JS wrapper is tiny)</li>
+            <li>WebGL context can fail on very old devices (graceful fallback needed)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <code class="tell-claude">Tell Claude: "Option B"</code>
+      </div>
+    </article>
+
+    <!-- OPTION C: Three.js -->
+    <article class="option-card option-c not-chosen">
+      <div class="card-header">
+        <div class="card-header-top">
+          <span class="option-label">Option C</span>
+          <div class="card-badges">
+            <span class="chosen-badge">Chosen</span>
+          </div>
+        </div>
+        <h2 class="option-title">Three.js Shader Material</h2>
+      </div>
+
+      <div class="visual-preview">
+        <div class="arch-diagram">
+          <div class="arch-layer">
+            <div class="arch-box frontend">React Component</div>
+          </div>
+          <div class="arch-arrow">&darr;</div>
+          <div class="arch-layer">
+            <div class="arch-box" style="border-color: #059669; color: #059669;">Three.js (~150KB)</div>
+          </div>
+          <div class="arch-arrow">&darr; manages</div>
+          <div class="arch-layer">
+            <div class="arch-box backend">Scene + Camera</div>
+            <div class="arch-box backend">Renderer</div>
+          </div>
+          <div class="arch-arrow">&darr;</div>
+          <div class="arch-layer">
+            <div class="arch-box service">ShaderMaterial (GLSL)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="option-summary">
+        Use Three.js as a convenience layer over WebGL. You still write the same GLSL shader for the blob effect, but
+        Three.js handles the WebGL boilerplate (context creation, resize handling, render loop). It's the standard choice
+        for WebGL in production. The downside: you're pulling in a ~150KB library mostly to avoid writing ~50 lines of
+        WebGL setup code. Makes more sense if you plan to add 3D elements later (like depth, lighting, or 3D blob geometry).
+      </div>
+
+      <div class="verdict">
+        <div class="pros">
+          <h3>Works well when</h3>
+          <ul>
+            <li>Familiar API if you know Three.js</li>
+            <li>Easy to extend with 3D later</li>
+            <li>Handles edge cases (context loss, resize)</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>Watch out for</h3>
+          <ul>
+            <li>~150KB dependency for a 2D effect</li>
+            <li>Overkill — you'd use 5% of the library</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <code class="tell-claude">Tell Claude: "Option C"</code>
+      </div>
+    </article>
+
+    <!-- OPTION D: SVG + GSAP -->
+    <article class="option-card option-d not-chosen">
+      <div class="card-header">
+        <div class="card-header-top">
+          <span class="option-label">Option D</span>
+          <div class="card-badges">
+            <span class="chosen-badge">Chosen</span>
+          </div>
+        </div>
+        <h2 class="option-title">SVG + GSAP Evolution</h2>
+      </div>
+
+      <div class="visual-preview">
+        <div class="arch-diagram">
+          <div class="arch-layer">
+            <div class="arch-box frontend">React Component</div>
+          </div>
+          <div class="arch-arrow">&darr;</div>
+          <div class="arch-layer">
+            <div class="arch-box" style="border-color: #dc2626; color: #dc2626;">GSAP (~30KB)</div>
+            <div class="arch-box backend">SVG Elements</div>
+          </div>
+          <div class="arch-arrow">&darr; tweens</div>
+          <div class="arch-layer">
+            <div class="arch-box service">Path Morphing</div>
+            <div class="arch-box service">SVG Filters</div>
+          </div>
+          <div class="arch-arrow">&darr;</div>
+          <div class="arch-layer">
+            <div class="arch-box database">gooey-react filter</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="option-summary">
+        Keep the SVG + gooey filter approach but replace CSS keyframes with GSAP (a professional animation library).
+        GSAP can do noise-based path morphing, spring physics, and mouse-following with its built-in easing.
+        This is the least disruptive change — you're enhancing what you have rather than replacing it.
+        But the SVG filter approach has a hard ceiling: it can't do per-pixel glow, smooth color gradients
+        within the blob, or the fluid look that shaders can achieve.
+      </div>
+
+      <div class="verdict">
+        <div class="pros">
+          <h3>Works well when</h3>
+          <ul>
+            <li>Smallest change from current code</li>
+            <li>GSAP is battle-tested and well-documented</li>
+            <li>SVG stays accessible and inspectable</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>Watch out for</h3>
+          <ul>
+            <li>SVG filter performance degrades with complexity</li>
+            <li>Hard ceiling on visual effects (no glow, no gradients inside blobs)</li>
+            <li>Won't achieve the "wow" factor of GPU-rendered effects</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <code class="tell-claude">Tell Claude: "Option D"</code>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- COMPARISON TABLE -->
+  <section class="comparison-section">
+    <h2>How They Compare</h2>
+    <div class="comparison-table-wrapper">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="col-a">A: Canvas 2D</th>
+            <th class="col-b col-recommended">B: WebGL Shader</th>
+            <th class="col-c">C: Three.js</th>
+            <th class="col-d">D: SVG + GSAP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Performance (fullscreen)</td>
+            <td>Medium — CPU-bound</td>
+            <td class="col-recommended">Excellent — GPU parallel</td>
+            <td>Excellent — same GPU</td>
+            <td>Poor at high complexity</td>
+          </tr>
+          <tr>
+            <td>Visual ceiling</td>
+            <td>High (manual work)</td>
+            <td class="col-recommended">Highest — anything is possible</td>
+            <td>Highest — same shaders</td>
+            <td>Medium — filter limits</td>
+          </tr>
+          <tr>
+            <td>Bundle size added</td>
+            <td>0 KB</td>
+            <td class="col-recommended">0 KB (raw WebGL)</td>
+            <td>~150 KB (Three.js)</td>
+            <td>~30 KB (GSAP)</td>
+          </tr>
+          <tr>
+            <td>Complexity to implement</td>
+            <td>Medium</td>
+            <td class="col-recommended">Medium (GLSL learning curve)</td>
+            <td>Medium-Low</td>
+            <td>Low</td>
+          </tr>
+          <tr>
+            <td>Mouse/touch reactivity</td>
+            <td>Good — manual math</td>
+            <td class="col-recommended">Excellent — native in shader</td>
+            <td>Excellent — same</td>
+            <td>Good — GSAP helpers</td>
+          </tr>
+          <tr>
+            <td>Color effects (glow, gradients)</td>
+            <td>Hard — manual blending</td>
+            <td class="col-recommended">Trivial — built into GLSL</td>
+            <td>Trivial — same GLSL</td>
+            <td>Limited to SVG filters</td>
+          </tr>
+          <tr>
+            <td>Mobile performance</td>
+            <td>Can struggle on old phones</td>
+            <td class="col-recommended">Great — mobile GPUs handle shaders well</td>
+            <td>Great — same GPU</td>
+            <td>OK for simple effects</td>
+          </tr>
+          <tr>
+            <td>Fallback story</td>
+            <td>Works everywhere</td>
+            <td class="col-recommended">Needs WebGL (99%+ of browsers)</td>
+            <td>Needs WebGL (same)</td>
+            <td>Works everywhere</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="page-footer">
+    <p>Tell Claude: <strong>"Option A"</strong>, <strong>"Option C but [your change]"</strong>, or <strong>"more options"</strong></p>
+    <p>To change a past decision: <strong>"for decision-001 I want Option B instead"</strong></p>
+  </div>
+
+</body>
+</html>
