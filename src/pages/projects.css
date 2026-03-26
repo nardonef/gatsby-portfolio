@@ -1,7 +1,7 @@
 /* ===== Page ===== */
 
 .projects-page {
-    padding: 40px 5%;
+    padding: 80px 5% 40px;
 }
 
 /* ===== Featured Project ===== */
@@ -199,7 +199,7 @@
 
 @media only screen and (min-width: 720px) {
     .projects-page {
-        padding: 60px 8%;
+        padding: 80px 8% 60px;
     }
 
     .featured-title {
